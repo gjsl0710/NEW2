@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = process.argv.length == 2 ? process.env.token : "";
+const { token } = require('./config.json');
+
 const { readdirSync } = require('fs');
 const { join } = require('path');
 
@@ -20,7 +21,7 @@ client.on("error", console.error);
 
 client.on('ready', () => {
   console.log(`${client.user.id}로 로그인 성공!`);
-  client.user.setActivity('"문아 도움말" 입력시 도움말이 표시된다구요?!') //상태메시지
+  client.user.setActivity('"문아 도움" 을입력하면 도움말이 표시된다구요?!') //상태메시지
 });
 
 client.on("message", async message => {
