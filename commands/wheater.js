@@ -20,9 +20,9 @@ module.exports = {
 
         const weatherinfo = new Discord.MessageEmbed()
         .setDescription(`**${current.skytext}**`)
-        .setAuthor(`${current.observationpoint}라구요?!`)
+        .setAuthor(`${current.observationpoint}지역의 날씨라구요?!`)
         .setThumbnail(current.imageUrl)
-        .setColor(0x111111)
+        .setColor('RANDOM')
         .addField('시간 종류', `GMT-${location.timezone}`, true)
         .addField('온도 타입', '섭씨', true)
         .addField('온도', `${current.temperature}°`, true)
