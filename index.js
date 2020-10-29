@@ -1,10 +1,17 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = process.argv.length == 2 ? process.env.token : "";
+const token = process.env.token;
 
 const { readdirSync } = require('fs');
 const { join } = require('path');
+client.on('messageDelete', async message => {
+  message.channel.send(`<@!${message.author.id}> 님이 \`${message.content}\`를 삭제했대요~!!`)
+})
 
+client.on('messageUpdate', async(oldMessage, newMessage) => {
+  if(oldMessage.content === newMessage.content) return // 임베드로 인한 수정같은 경우 
+  oldMessage.channel.send(`<@!${oldMessage.author.id}> 님이 \`${oldMessage.content}\` 를 \`${newMessage.content}\` 로 수정했어요~!`)
+})
 client.commands = new Discord.Collection();
 
 const prefix = '문아' //자신의 프리픽스
@@ -21,7 +28,7 @@ client.on("error", console.error);
 
 client.on('ready', () => {
   console.log(`${client.user.id}로 로그인 성공!`);
-  client.user.setActivity('"문아 도움" 을입력하면 도움말이 표시된다구요?!') //상태메시지
+  client.user.setActivity('"문아 도움말" 을입력하면 도움말이 표시된다구요?!') //상태메시지
 });
 
 client.on("message", async message => {
