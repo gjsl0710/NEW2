@@ -9,7 +9,7 @@ module.exports = {
     async run (client, message, args) {
 
         const permission = new Discord.MessageEmbed()
-        .setTitle(':x: Missing arguments')
+        .setTitle(':x: 오류가 발생했어요!')
         .setColor(0xFF0000)
         .setDescription('관리자만 사용 가능하다구요?!')
         .setTimestamp()
@@ -19,7 +19,7 @@ module.exports = {
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
 
         const noArgs = new Discord.MessageEmbed()
-        .setTitle(':x: Missing arguments')
+        .setTitle(':x: 오류가 발생했어요!')
         .setColor(0xFF0000)
         .setDescription('누구를 경고하실건지 알려주세요!')
         .setTimestamp()
@@ -43,13 +43,13 @@ module.exports = {
 
         if(warnings === null) {
             db.set(`warnings_${message.guild.id}_${user.id}`, 1);
-            user.send(`${message.guild.name}님이 당신에게 경고를 내렸어요... 이유: \`${reason}\``)
+            user.send(`${message.guild.name}서버 관리자가 당신에게 경고를 내렸어요... 이유: \`${reason}\``)
             await message.channel.send(`**${user.username}**님이 경고를 받았어요!`)
         }
 
         if(warnings !== null){
             db.add(`warnings_${message.guild.id}_${user.id}`, 1)
-            user.send(`${message.guild.name}이님이 당신에게 경고를 내렸어요... 이유: \`${reason}\``)
+            user.send(`${message.guild.name}서버 관리자가 당신에게 경고를 내렸어요... 이유: \`${reason}\``)
             await message.channel.send(`**${user.username}**님이 경고를 받았어요!`)
         }
     }
